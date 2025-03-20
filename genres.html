@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sound History - Genres</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --secondary: #16213e;
+      --accent: #ff6b6b;
+      --accent-dark: #e63946;
+      --light: #f8f8f8;
+      --text: #333333;
+      --transition: all 0.3s ease;
+      --gradient: linear-gradient(135deg, #ff6b6b, #e63946);
+    }
+
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background-color: var(--light);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* Navigation (Same as timeline.html) */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 20px 0;
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-link {
+      color: white;
+      font-weight: 500;
+      padding: 8px 0;
+      transition: var(--transition);
+      opacity: 0.85;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      opacity: 1;
+    }
+
+    /* Header Section */
+    header.header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      position: relative;
+      padding: 120px 20px 60px;
+      text-align: center;
+      color: white;
+      margin-top: 80px;
+      overflow: hidden;
+    }
+
+    header.header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+      opacity: 0.25;
+      z-index: 0;
+    }
+
+    header.header h1 {
+      font-size: 54px;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    header.header p {
+      font-size: 22px;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Genre Grid */
+    .genre-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .genre-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .genre-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .genre-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .genre-card .card-content {
+      padding: 20px;
+    }
+
+    .genre-card .card-content h2 {
+      font-size: 24px;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .genre-card .card-content p {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .genre-card .card-content a {
+      display: inline-block;
+      background: var(--gradient);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .genre-card .card-content a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
+    }
+
+    /* Footer (Same as timeline.html) */
+    footer.footer {
+      background-color: var(--primary);
+      color: white;
+      padding: 60px 0 30px;
+    }
+
+    .footer .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo-icon {
+      background: var(--gradient);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+    }
+
+    .footer-text {
+      opacity: 0.7;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background-color: var(--accent);
+      transform: translateY(-5px);
+    }
+
+    .footer-title {
+      font-size: 18px;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: var(--accent);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-link {
+      margin-bottom: 12px;
+    }
+
+    .footer-link a {
+      opacity: 0.7;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .footer-link a:hover {
+      opacity: 1;
+      color: var(--accent);
+      gap: 10px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0.7;
+      font-size: 14px;
+    }
+  </style>
+  <link rel="stylesheet" href="timeline.css" class="style">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-icon">SH</div>
+        <span>Sound History</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="timeline.html" class="nav-link">Timeline</a></li>
+        <li><a href="genres.html" class="nav-link active">Genres</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header Section -->
+  <header class="header">
+    <h1>Our Genres</h1>
+    <p>Discover the rich diversity of music that spans centuries and continents.</p>
+  </header>
+
+  <!-- Genre Grid -->
+  <section class="genre-grid">
+    <!-- Genre Card 1: Classical -->
+    <div class="genre-card">
+      <img
+        src="https://media.npr.org/assets/img/2012/12/12/ravi_child_custom-2d185f557449de2d6fc75c069f44a6ba571af14d.jpg?s=1100&c=50&f=jpeg"
+        alt="Classical Music">
+      <div class="card-content">
+        <h2>Classical</h2>
+        <p>Elegant compositions from Indian and Western traditions.</p>
+        <a href="classical.html">Explore Classical</a>
+      </div>
+    </div>
+    <!-- Genre Card 2: Jazz -->
+    <div class="genre-card">
+      <img
+        src="https://media.istockphoto.com/id/465732100/photo/african-jazz-musician-playing-the-saxophone.jpg?s=612x612&w=0&k=20&c=hCw5oibcUVJYSHqAWJQnD3AHpPATEdCZoA4TS8qqkng="
+        alt="Jazz Music">
+      <div class="card-content">
+        <h2>Jazz</h2>
+        <p>Soulful, improvisational tunes that move the spirit.</p>
+        <a href="jazz.html">Explore Jazz</a>
+      </div>
+    </div>
+    <!-- Genre Card 3: Rock -->
+    <div class="genre-card">
+      <img
+        src="https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cm9jayUyMG11c2ljfGVufDB8fDB8fHww"
+        alt="Rock Music">
+      <div class="card-content">
+        <h2>Rock</h2>
+        <p>High-energy anthems and modern rock fusion.</p>
+        <a href="rock.html">Explore Rock</a>
+      </div>
+    </div>
+    <!-- Optional Additional Genre Cards -->
+    <!-- Genre Card 4: Electronic -->
+    <div class="genre-card">
+      <img
+        src="https://blog.native-instruments.com/wp-content/uploads/dynamic/2023/02/pillar-page-how-to-make-electronic-music-3-1200x0-c-default.jpg"
+        alt="Electronic Music">
+      <div class="card-content">
+        <h2>Electronic</h2>
+        <p>Rhythmic beats and digital soundscapes.</p>
+        <a href="electronic.html">Explore Electronic</a>
+      </div>
+    </div>
+    <!-- Genre Card 5: Hip-Hop -->
+    <div class="genre-card">
+      <img
+        src="https://images.unsplash.com/photo-1508973379184-7517410fb0bc?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aGlwJTIwaG9wfGVufDB8fDB8fHww"
+        alt="Hip-Hop Music">
+      <div class="card-content">
+        <h2>Hip-Hop</h2>
+        <p>Rhythmic poetry and urban storytelling.</p>
+        <a href="hiphop.html">Explore Hip-Hop</a>
+      </div>
+    </div>
+    <!-- Genre Card 6: World Music -->
+    <div class="genre-card">
+      <img src="https://t4.ftcdn.net/jpg/05/78/97/13/360_F_578971348_5POWQWK45vfABMdNYS8piq2Nhabf6TiJ.jpg"
+        alt="World Music">
+      <div class="card-content">
+        <h2>World Music</h2>
+        <p>A journey across global sound traditions.</p>
+        <a href="world.html">Explore World Music</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (Same as timeline.html) -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <div class="footer-logo-icon">SH</div>
+            <span>Sound History</span>
+          </div>
+          <p class="footer-text">Exploring the evolution of music through time, from ancient rhythms to modern digital
+            compositions.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li class="footer-link"><a href="timeline.html"><i class="fas fa-chevron-right"></i> Timeline</a></li>
+            <li class="footer-link"><a href="genres.html"><i class="fas fa-chevron-right"></i> Genres</a></li>
+            <li class="footer-link"><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+            <li class="footer-link"><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-title">Explore</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="instruments.html"><i class="fas fa-chevron-right"></i> Instruments</a></li>
+            <li class="footer-link"><a href="composers.html"><i class="fas fa-chevron-right"></i> Composers</a></li>
+            <li class="footer-link"><a href="innovations.html"><i class="fas fa-chevron-right"></i> Innovations</a></li>
+            <li class="footer-link"><a href="blog.html"><i class="fas fa-chevron-right"></i> Blog</a></li>
+            <li class="footer-link"><a href="resources.html"><i class="fas fa-chevron-right"></i> Resources</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-title">Contact Us</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="mailto:info@soundhistory.com"><i class="fas fa-envelope"></i>
+                info@soundhistory.com</a></li>
+            <li class="footer-link"><a href="tel:+11234567890"><i class="fas fa-phone"></i>+91-9802365236</a></li>
+            <li class="footer-link"><a href="#"><i class="fas fa-map-marker-alt"></i> Harmony School</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Sound History. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

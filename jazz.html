@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sound History - Jazz Music</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --secondary: #16213e;
+      --accent: #ff6b6b;
+      --accent-dark: #e63946;
+      --light: #f8f8f8;
+      --text: #333333;
+      --transition: all 0.3s ease;
+      --gradient: linear-gradient(135deg, #ff6b6b, #e63946);
+    }
+
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background-color: var(--light);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 20px 0;
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-link {
+      color: white;
+      font-weight: 500;
+      padding: 8px 0;
+      transition: var(--transition);
+      opacity: 0.85;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      opacity: 1;
+    }
+
+    /* Header Section */
+    header.header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      padding: 120px 0 60px;
+      text-align: center;
+      color: white;
+      margin-top: 80px;
+    }
+
+    header.header h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    header.header p {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
+    /* Music Grid */
+    .music-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .music-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+      transition: var(--transition);
+    }
+
+    .music-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .music-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 20px;
+      text-align: left;
+    }
+
+    .card-content h2 {
+      font-size: 22px;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .card-content p {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .card-content audio {
+      width: 100%;
+      outline: none;
+    }
+
+    /* Footer (Same as timeline.html) */
+    footer.footer {
+      background-color: var(--primary);
+      color: white;
+      padding: 60px 0 30px;
+    }
+
+    .footer .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo-icon {
+      background: var(--gradient);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+    }
+
+    .footer-text {
+      opacity: 0.7;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background-color: var(--accent);
+      transform: translateY(-5px);
+    }
+
+    .footer-title {
+      font-size: 18px;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: var(--accent);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-link {
+      margin-bottom: 12px;
+    }
+
+    .footer-link a {
+      opacity: 0.7;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .footer-link a:hover {
+      opacity: 1;
+      color: var(--accent);
+      gap: 10px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0.7;
+      font-size: 14px;
+    }
+  </style>
+  <link rel="stylesheet" href="timeline.css" class="sty">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav id="mainNav">
+    <div class="container nav-container">
+      <div class="logo">
+        <div class="logo-icon">SH</div>
+        <span>Sound History</span>
+      </div>
+      <div class="menu-toggle" id="mobile-menu">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="jazz.html" class="nav-link active">Jazz</a></li>
+        <li><a href="genres.html" class="nav-link">Genres</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header Section -->
+  <header class="header">
+    <h1>Jazz Music</h1>
+    <p>Immerse yourself in soulful tunes and improvisational brilliance from around the world.</p>
+  </header>
+
+  <!-- Music Grid -->
+  <section class="music-grid">
+    <!-- Card 6: Indian Jazz Fusion -->
+    <div class="music-card">
+      <img src="https://www.shutterstock.com/image-photo/moments-american-jazz-fusion-band-260nw-2459831937.jpg"
+        alt="Indian Jazz Fusion">
+      <div class="card-content">
+        <h2>Indian Jazz Fusion - Experiment</h2>
+        <p>A unique blend of Indian classical elements with jazz improvisation.</p>
+        <audio controls>
+          <source src="./audio/indian.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+    <!-- Card 1: Louis Armstrong -->
+    <div class="music-card">
+      <img
+        src="https://www.udiscovermusic.com/wp-content/uploads/2020/08/Louis-Armstong-Courtesy-Louis-Amstrong-House-Museum-1000x600.jpg"
+        alt="Louis Armstrong">
+      <div class="card-content">
+        <h2>Louis Armstrong - What a Wonderful World</h2>
+        <p>A timeless classic from the golden era of jazz.</p>
+        <audio controls>
+          <source src="./audio/louis.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+    <!-- Card 2: Duke Ellington -->
+    <div class="music-card">
+      <img src="https://i.ytimg.com/vi/RFUSD23ZXEw/maxresdefault.jpg" alt="Duke Ellington">
+      <div class="card-content">
+        <h2>Duke Ellington - Mood Indigo</h2>
+        <p>A smooth and soulful tune from a jazz legend.</p>
+        <audio controls>
+          <source src="./audio/ellington.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+    <!-- Card 3: Charlie Parker -->
+    <div class="music-card">
+      <img src="https://indianapublicmedia.org/large-images/nightlights-images/charlie-parker-and-miles-davis.jpg"
+        alt="Charlie Parker">
+      <div class="card-content">
+        <h2>Charlie Parker - Ornithology</h2>
+        <p>A bebop masterpiece that redefined jazz improvisation.</p>
+        <audio controls>
+          <source src="./audio/charlie.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+    <!-- Card 4: John Coltrane -->
+    <div class="music-card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK-PPWlSUUsU7iPQErgCzKdj6F7nZJE5M1nw&s"
+        alt="John Coltrane">
+      <div class="card-content">
+        <h2>John Coltrane - My Favorite Things</h2>
+        <p>A mesmerizing modal jazz rendition that captivates the soul.</p>
+        <audio controls>
+          <source src="./audio/coltrane.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+    <!-- Card 5: Ella Fitzgerald -->
+    <div class="music-card">
+      <img src="https://i.ytimg.com/vi/NLwGiOIllHk/sddefault.jpg" alt="Ella Fitzgerald">
+      <div class="card-content">
+        <h2>Ella Fitzgerald - Summertime</h2>
+        <p>A vocal masterpiece full of warmth and emotion.</p>
+        <audio controls>
+          <source src="./audio/ella.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (Same Footer as in timeline.html) -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <div class="footer-logo-icon">SH</div>
+            <span>Sound History</span>
+          </div>
+          <p class="footer-text">Exploring the evolution of music through time, from ancient rhythms to modern digital
+            compositions.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li class="footer-link"><a href="timeline.html"><i class="fas fa-chevron-right"></i> Timeline</a></li>
+            <li class="footer-link"><a href="genres.html"><i class="fas fa-chevron-right"></i> Genres</a></li>
+            <li class="footer-link"><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+            <li class="footer-link"><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-title">Explore</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="instruments.html"><i class="fas fa-chevron-right"></i> Instruments</a></li>
+            <li class="footer-link"><a href="composers.html"><i class="fas fa-chevron-right"></i> Composers</a></li>
+            <li class="footer-link"><a href="innovations.html"><i class="fas fa-chevron-right"></i> Innovations</a></li>
+            <li class="footer-link"><a href="blog.html"><i class="fas fa-chevron-right"></i> Blog</a></li>
+            <li class="footer-link"><a href="resources.html"><i class="fas fa-chevron-right"></i> Resources</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-title">Contact Us</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="mailto:info@soundhistory.com"><i class="fas fa-envelope"></i>
+                info@soundhistory.com</a></li>
+            <li class="footer-link"><a href="tel:+11234567890"><i class="fas fa-phone"></i>+91-9802365236</a></li>
+            <li class="footer-link"><a href="#"><i class="fas fa-map-marker-alt"></i> Harmony School</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Sound History. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

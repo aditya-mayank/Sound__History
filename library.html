@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sound History - Comprehensive Library</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Inline CSS (adjust or replace with external stylesheet if desired) -->
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --secondary: #16213e;
+      --accent: #ff6b6b;
+      --accent-dark: #e63946;
+      --light: #f8f8f8;
+      --text: #333333;
+      --transition: all 0.3s ease;
+      --gradient: linear-gradient(135deg, #ff6b6b, #e63946);
+    }
+
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background-color: var(--light);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 20px 0;
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-link {
+      color: white;
+      font-weight: 500;
+      padding: 8px 0;
+      transition: var(--transition);
+      opacity: 0.85;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      opacity: 1;
+    }
+
+    /* Header Section */
+    header.header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      padding: 120px 0 60px;
+      text-align: center;
+      color: white;
+      margin-top: 80px;
+    }
+
+    header.header h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    header.header p {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
+    /* Library Grid */
+    .library-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .library-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+      transition: var(--transition);
+    }
+
+    .library-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .library-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 20px;
+      text-align: left;
+    }
+
+    .card-content h2 {
+      font-size: 22px;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .card-content p {
+      font-size: 16px;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer.footer {
+      background-color: var(--primary);
+      color: white;
+      padding: 60px 0 30px;
+      margin-top: 60px;
+    }
+
+    .footer .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo-icon {
+      background: var(--gradient);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+    }
+
+    .footer-text {
+      opacity: 0.7;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background-color: var(--accent);
+      transform: translateY(-5px);
+    }
+
+    .footer-title {
+      font-size: 18px;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: var(--accent);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-link {
+      margin-bottom: 12px;
+    }
+
+    .footer-link a {
+      opacity: 0.7;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .footer-link a:hover {
+      opacity: 1;
+      color: var(--accent);
+      gap: 10px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0.7;
+      font-size: 14px;
+    }
+  </style>
+  <link rel="stylesheet" href="timeline.css" class="dtyle">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav id="mainNav">
+    <div class="container nav-container">
+      <div class="logo">
+        <div class="logo-icon">SH</div>
+        <span>Sound History</span>
+      </div>
+      <div class="menu-toggle" id="mobile-menu">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="library.html" class="nav-link active">Comprehensive Library</a></li>
+        <li><a href="genres.html" class="nav-link">Genres</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header Section -->
+  <header class="header">
+    <h1>Comprehensive Library</h1>
+    <p>Dive into our extensive collection of articles, research, and multimedia content exploring the evolution of music.</p>
+  </header>
+
+  <!-- Library Grid -->
+  <section class="library-grid">
+    <!-- Library Card 1 -->
+    <div class="library-card">
+      <img src="https://media.gettyimages.com/id/537534415/vector/ulysses-weeps-at-the-song-of-demodocus.jpg?s=612x612&w=gi&k=20&c=c2PquBRRJO9JSmv9VpYdqsmjDISarz-0s6WECI4sXPw=" alt="Article 1">
+      <div class="card-content">
+        <h2>Exploring Ancient Melodies</h2>
+        <p>An in-depth look at the origins of music and its evolution through ancient civilizations.</p>
+      </div>
+    </div>
+    <!-- Library Card 2 -->
+    <div class="library-card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp8AbtOgZMeC8pPM6AXog-5s_QzgcpiaHGlg&s" alt="Article 2">
+      <div class="card-content">
+        <h2>The Rise of Classical Music</h2>
+        <p>Discover the innovations and masterpieces of the Classical era that shaped modern music.</p>
+      </div>
+    </div>
+    <!-- Library Card 3 -->
+    <div class="library-card">
+      <img src="https://cdn.radioart.com/images/blog/Jazz_into1.jpg" alt="Article 3">
+      <div class="card-content">
+        <h2>Jazz and Its Cultural Impact</h2>
+        <p>An exploration of Jazz history and its profound influence on global music trends.</p>
+      </div>
+    </div>
+    <!-- Library Card 4 -->
+    <div class="library-card">
+      <img src="https://images.squarespace-cdn.com/content/v1/5452d441e4b0c188b51fef1a/585cfa80-3a8d-4ab0-bb1c-6e6b50f6a1b8/Mariachi+Rock.jpeg" alt="Article 4">
+      <div class="card-content">
+        <h2>Rock Revolution</h2>
+        <p>A detailed look at how rock music revolutionized popular culture around the world.</p>
+      </div>
+    </div>
+    <!-- Library Card 5 -->
+    <div class="library-card">
+      <img src="https://www.shutterstock.com/image-vector/contemporary-digital-modern-art-abstract-260nw-1845088702.jpg" alt="Article 5">
+      <div class="card-content">
+        <h2>Modern Digital Compositions</h2>
+        <p>Examine the latest trends and technologies that are transforming the music industry.</p>
+      </div>
+    </div>
+    <!-- Library Card 6 -->
+    <div class="library-card">
+      <img src="https://eastendarts.org/wp-content/uploads/2024/10/violin.jpg" alt="Article 6">
+      <div class="card-content">
+        <h2>Innovations in Instrument Design</h2>
+        <p>Learn about the evolution of musical instruments from traditional craftsmanship to cutting-edge innovation.</p>
+      </div>
+    </div>
+    <!-- Library Card 7 -->
+    <div class="library-card">
+      <img src="https://static01.nyt.com/images/2011/01/05/arts/Composer-cover/Composer-cover-articleLarge.jpg?quality=75&auto=webp&disable=upscale" alt="Article 7">
+      <div class="card-content">
+        <h2>Famous Composers</h2>
+        <p>Profiles of legendary composers whose works continue to influence music today.</p>
+      </div>
+    </div>
+    <!-- Library Card 8 -->
+    <div class="library-card">
+      <img src="https://assets.tonegym.co/posts/44A5AY.png" alt="Article 8">
+      <div class="card-content">
+        <h2>Music Theory Fundamentals</h2>
+        <p>A beginner’s guide to understanding the principles behind music composition and theory.</p>
+      </div>
+    </div>
+    <!-- Library Card 9 -->
+    <div class="library-card">
+      <img src="https://www.archives.gov/files/preservation/formats/images/audio-brief-history-l.jpg" alt="Article 9">
+      <div class="card-content">
+        <h2>The Evolution of Recording Technology</h2>
+        <p>Trace the development of recording techniques from analog to digital formats.</p>
+      </div>
+    </div>
+    <!-- Library Card 10 -->
+    <div class="library-card">
+      <img src="https://media.licdn.com/dms/image/D5612AQEwx9dUyrDH9Q/article-cover_image-shrink_720_1280/0/1721294348228?e=2147483647&v=beta&t=WKhDCqwLv6g5lHFkXITxymNAyALmk7UlQWCUWHpHUKs" alt="Article 10">
+      <div class="card-content">
+        <h2>Impact of Music on Society</h2>
+        <p>An analytical look at how music has influenced social movements and cultural identities.</p>
+      </div>
+    </div>
+    <!-- Library Card 11 -->
+    <div class="library-card">
+      <img src="https://raindance.org/wp-content/uploads/2020/09/music-in-film.jpeg" alt="Article 11">
+      <div class="card-content">
+        <h2>Music in Film and Media</h2>
+        <p>Explore the role of music in enhancing storytelling and emotional impact in movies.</p>
+      </div>
+    </div>
+    <!-- Library Card 12 -->
+    <div class="library-card">
+      <img src="https://i0.wp.com/blog.sapaindia.com/wp-content/uploads/2023/06/happy-world-music-day.jpg?fit=1200%2C675&ssl=1" alt="Article 12">
+      <div class="card-content">
+        <h2>Global Music Traditions</h2>
+        <p>A celebration of diverse musical traditions and how they contribute to our cultural mosaic.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <div class="footer-logo-icon">SH</div>
+            <span>Sound History</span>
+          </div>
+          <p class="footer-text">Exploring the evolution of music through time, from ancient rhythms to modern digital compositions.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li class="footer-link"><a href="sample.html"><i class="fas fa-chevron-right"></i> Audio Samples</a></li>
+            <li class="footer-link"><a href="genres.html"><i class="fas fa-chevron-right"></i> Genres</a></li>
+            <li class="footer-link"><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+            <li class="footer-link"><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-title">Explore</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="instruments.html"><i class="fas fa-chevron-right"></i> Instruments</a></li>
+            <li class="footer-link"><a href="composers.html"><i class="fas fa-chevron-right"></i> Composers</a></li>
+            <li class="footer-link"><a href="innovations.html"><i class="fas fa-chevron-right"></i> Innovations</a></li>
+            <li class="footer-link"><a href="blog.html"><i class="fas fa-chevron-right"></i> Blog</a></li>
+            <li class="footer-link"><a href="resources.html"><i class="fas fa-chevron-right"></i> Resources</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-title">Contact Us</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="mailto:info@soundhistory.com"><i class="fas fa-envelope"></i> info@soundhistory.com</a></li>
+            <li class="footer-link"><a href="tel:+11234567890"><i class="fas fa-phone"></i> +91-9802365236</a></li>
+            <li class="footer-link"><a href="#"><i class="fas fa-map-marker-alt"></i> Harmony School</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Sound History. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
